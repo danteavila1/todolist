@@ -1,35 +1,27 @@
 import taskBoard from "./taskBoard";
 
 const newProject = () => {
-    const addProject = document.querySelector('.add-project-btn');
-    const newProject = document.createElement('input');
-    newProject.classList.add('new-project');
-    
-    const addBtn = document.createElement('button');
-    addBtn.classList.add('add-btn');
-    addBtn.textContent = ("Add");
-    const cancelBtn = document.createElement('button');
-    cancelBtn.classList.add('cancel-btn');
-    cancelBtn.textContent = ("Cancel");
+    const projectForm = document.querySelector("#project-form");
+    projectForm.classList.remove("hidden");
 
-    addProject.appendChild(newProject);
-    addProject.appendChild(addBtn);
-    addProject.appendChild(cancelBtn);
+    const add = document.querySelector(".add-btn");
+    add.addEventListener("click", addProjectForm);
 
-    let input;
-    addBtn.addEventListener('click', () => {
-        input = newProject.value;
-        taskBoard();
-    })
-
-    cancelBtn.addEventListener('click', () =>{
-        addProject.removeChild(newProject);
-        addProject.removeChild(addBtn);
-        addProject.removeChild(cancelBtn);
-    })
-
+    const cancel = document.querySelector(".cancel-btn");
+    cancel.addEventListener("click", hideProjectForm);
 }
 
+const addProjectForm = () => {
+    alert("hola")
+}
+
+const hideProjectForm = () => {
+    const projectForm = document.querySelector("#project-form");
+    const projectInput = document.querySelector('#project-input');
+
+    projectInput.value = "";
+    projectForm.classList.add("hidden");
+}
 
 
 export default newProject;

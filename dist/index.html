@@ -15,9 +15,35 @@
       <div class="options-board">
         <div class="project">Projects</div>
         <div class="add-project-btn">Add Project</div>
+
+          <form id="project-form" class="hidden">
+            <input type="text" id="project-input"/>
+            <div class="form-btns">
+              <input type="submit" class="add-btn" value="Add">
+              <input type="button" class="cancel-btn" value="Cancel">
+            </div>
+          </form>
+          
         <div class="task">Tasks</div>
       </div>
-      <div class="empty-board"></div>
+
+      <div class="empty-board">
+        <form id="edit-project-form" class="hiddenn" autocomplete="off">
+          <div class="input-field">
+              <label>Title:</label>
+              <input type="text" id="edit-title">
+              <label>Details(optional):</label>
+              <textarea type="text" id="edit-detail" wrap="hard"></textarea>
+              <label>Date:</label>
+              <input type="date" id="edit-date" >
+              <div class="form-btns">
+                  <input type="submit" class="task-add-btn" value="Add">
+                  <input type="button" class="task-cancel-btn" value="Cancel">
+              </div>
+          </div>
+      </form>
+      </div>
+
     </div>
   </body>
 </html>
