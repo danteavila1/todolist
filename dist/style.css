@@ -8,3 +8,13 @@
 .board {
     display: flex;
 }
+
+.hidden{
+    top:0;
+    left:0;
+    pointer-events: none !important;
+    position: absolute !important;
+    max-height:0 !important;
+    transition: max-height 1s ease-out !important;    
+    opacity: 0 !important;
+}
