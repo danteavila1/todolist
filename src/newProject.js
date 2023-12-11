@@ -12,7 +12,13 @@ const newProject = () => {
 }
 
 const addProjectForm = () => {
-    alert("hola")
+    const projectInput = document.getElementById("project-input").value;
+    const addProjectBtn = document.querySelector(".add-project-btn");
+    const projectName = document.createElement("div")
+    projectName.classList.add("project-name");
+    projectName.textContent = projectInput;
+    addProjectBtn.appendChild(projectName);
+    
 }
 
 const hideProjectForm = () => {
