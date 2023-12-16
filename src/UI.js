@@ -1,3 +1,4 @@
+import storeProject from "./localStorage";
 
 const newProject = () => {
     const projectForm = document.querySelector("#project-form");
@@ -18,6 +19,7 @@ const addProjectForm = () => {
     projectName.classList.add("project-name");
     projectName.textContent = projectInput;
     addProjectBtn.appendChild(projectName);
+    storeProject(projectInput);
     loadProjectBoard(projectInput);
 }
 
@@ -28,10 +30,15 @@ const hideProjectForm = () => {
     projectForm.classList.add("hidden");
 }
 
+
+
 const loadProjectBoard = (projectInput) => {
     document.getElementById('edit-project-form').classList.remove("hidden");
     const projectTitle = document.querySelector(".project-title");
     projectTitle.textContent = projectInput;
 }
+
+
+
 
 export default newProject;
