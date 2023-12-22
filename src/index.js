@@ -57,10 +57,34 @@ const hideProjectForm = () => {
 
 //projects
 
-let projectsArray = [];
+let projectsArray = [{
+    id: 1,
+    name: 'name'
+}, {
+    id:2,
+    name: 'todo'
+}];
 
-let projectsFromStorage = JSON.parse(localStorage.getItem('projects'))
-projectsArray = projectsFromStorage;
+const projectsContainer = document.querySelector(".projects-container");
+
+const render = () => {
+    clearElement(projectsContainer);
+    projectsArray.forEach(project => {
+        const projectElement = document.createElement('div');
+        projectElement.dataset.projectId = project.id;
+        projectElement.classList.add('project-name');
+        projectElement.innerText = project.name;
+        projectsContainer.appendChild(projectElement);
+    })
+}
+
+const clearElement = (element) => {
+
+}
+
+
+//let projectsFromStorage = JSON.parse(localStorage.getItem('projects'))
+//projectsArray = projectsFromStorage;
 
 const storeProject = (projectInput) => {
     const currentProject = new Project(projectInput);
@@ -92,3 +116,6 @@ function Task (title, description, date) {
     this.description = description;
     this.date = date;
 }
+
+
+render();
