@@ -1,5 +1,6 @@
 const addProject = document.querySelector('.add-project-btn');
 
+
 addProject.addEventListener('click', () => {
     newProject();
 })
@@ -22,20 +23,13 @@ const newProject = () => {
 
 const addProjectForm = () => {
     let projectInput = document.getElementById("project-input").value;
-    const addProjectBtn = document.querySelector(".add-project-btn");
     if(projectInput == ''){
         alert("You must write something!");
     } else {
-    const projectName = document.createElement("div")
-    projectName.classList.add("project-name");
-    projectName.textContent = projectInput;
-    const span = document.createElement("span");
-    span.innerHTML="\u00d7";
-    addProjectBtn.appendChild(projectName);
-    projectName.appendChild(span);
-    
-    storeProject(projectInput);
-    
+    const projectName = createProject(projectInput);
+    projectInput = null;
+    projectsArray.push(projectName);
+    saveAndRender();
     }
 }
 
@@ -57,65 +51,43 @@ const hideProjectForm = () => {
 
 //projects
 
-let projectsArray = [{
-    id: 1,
-    name: 'name'
-}, {
-    id:2,
-    name: 'todo'
-}];
+const localStorageProjects = 'task.projects';
+let projectsArray = JSON.parse(localStorage.getItem(localStorageProjects)) || []
+
 
 const projectsContainer = document.querySelector(".projects-container");
 
 const render = () => {
-    clearElement(projectsContainer);
     projectsArray.forEach(project => {
         const projectElement = document.createElement('div');
         projectElement.dataset.projectId = project.id;
         projectElement.classList.add('project-name');
         projectElement.innerText = project.name;
+        const span = document.createElement("span");
+        span.innerHTML="\u00d7";
+        projectElement.appendChild(span);
         projectsContainer.appendChild(projectElement);
     })
 }
 
-const clearElement = (element) => {
-
+const save = () => {
+    localStorage.setItem(localStorageProjects, JSON.stringify(projectsArray));
 }
 
-
-//let projectsFromStorage = JSON.parse(localStorage.getItem('projects'))
-//projectsArray = projectsFromStorage;
-
-const storeProject = (projectInput) => {
-    const currentProject = new Project(projectInput);
-    projectsArray.push(currentProject);
-    console.log(projectsArray);
-    localStorage.setItem("projects", JSON.stringify(projectsArray));
+const saveAndRender = () => {
+    save();
+    render();
 }
+
+const createProject = (projectName) =>{
+    return { id: Date.now().toString(), name: projectName, tasks: [] }
+}
+
 
 const getProjects = () => {
     return projectsArray;
 }
 
-function Project(name){
-    this.name = name;
-    this.tasks = [];
-}
+render()
 
 
-  
-
-
-
-
-
-//tasks
-
-function Task (title, description, date) {
-    this.title = title;
-    this.description = description;
-    this.date = date;
-}
-
-
-render();
