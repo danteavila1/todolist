@@ -51,13 +51,22 @@ const hideProjectForm = () => {
 
 //projects
 
+const localStorageSelectedProjectId = 'task.selectedProjectId'
 const localStorageProjects = 'task.projects';
 let projectsArray = JSON.parse(localStorage.getItem(localStorageProjects)) || []
-
+let selectedProjectId = localStorage.getItem(localStorageSelectedProjectId);
 
 const projectsContainer = document.querySelector(".projects-container");
+projectsContainer.addEventListener('click', e => {
+    if(e.target.classList.contains('project-name')){
+        selectedProjectId = e.target.dataset.projectId;
+        saveAndRender();
+    }
+})
+
 
 const render = () => {
+    clearElement(projectsContainer);
     projectsArray.forEach(project => {
         const projectElement = document.createElement('div');
         projectElement.dataset.projectId = project.id;
@@ -66,12 +75,22 @@ const render = () => {
         const span = document.createElement("span");
         span.innerHTML="\u00d7";
         projectElement.appendChild(span);
+        if(project.id == selectedProjectId) {
+            projectElement.classList.add('active-project');
+        }
         projectsContainer.appendChild(projectElement);
     })
 }
 
+const clearElement = (element) => {
+    while (element.firstChild) {
+        element.removeChild(element.firstChild);
+    }
+}
+
 const save = () => {
     localStorage.setItem(localStorageProjects, JSON.stringify(projectsArray));
+    localStorage.setItem(localStorageSelectedProjectId, selectedProjectId);
 }
 
 const saveAndRender = () => {
