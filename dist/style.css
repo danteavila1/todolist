@@ -18,3 +18,7 @@
     transition: max-height 1s ease-out !important;    
     opacity: 0 !important;
 }
+
+.active-project {
+    font-weight: 700;
+}
